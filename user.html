@@ -51,10 +51,16 @@
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-        .form-box.active {
             display: block;
+        }
+        .form-box-invisible {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
         }
         h2 {
             font-size: 32px;
@@ -72,7 +78,7 @@
             color: blue;
             margin-bottom: 20px;
         }
-        button {
+        button[type="submit"] {
             width:100%;
             padding: 12px;
             background-color:rgb(105, 105, 235);
@@ -86,7 +92,7 @@
             margin-bottom: 20px;
             transition: 0.5s;
         }
-        button:hover {
+        button[type="submit"]:hover {
             background-color: skyblue;
         }
         p {
@@ -94,25 +100,15 @@
         text-align: center;
         margin-bottom: 10px; 
         }
-        p a {
-            color: #7494ec;
-            text-decoration: none;
+        button[type="button"] {
+            border: none;
+            color: blue;
+            background-color: #fff;
         }
-        p a:hover{
+        button[type="button"]:hover {
             text-decoration: underline;
+            cursor: pointer;
         }
-        nav a:hover {
-            background-color:#a1b537;
-            color: white;
-          }
-          nav a:active{
-            background-color: #556B2F;
-            color: white;
-          }
-          nav a:visited{
-            background-color: #6B5F0B;
-            color: white;
-          }
     </style>
 </head>
 <body>
@@ -123,17 +119,16 @@
         </nav>
     </header>
     <div id="container">
-        <div class="form-box active" id="login-form">
+        <div class="form-box" id="login-form">
             <form actions="">
                 <h2>User Login</h2>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="login">Login</button>
-                <p>Don't have an account? <a href="#" onclick="showForm('register-form')">Sign Up</a></p>
+                <p>Don't have an account? <button type="button" id="to-register" onclick="toggleForm()">Sign Up</button></p>
             </form>
         </div>
-
-        <div class="form-box" id="register-form">
+        <div class="form-box-invisible" id="register-form">
             <form actions="">
                 <h2>User Registration</h2>
                 <input type="email" name="email" placeholder="Enter Email address" required>
@@ -142,12 +137,15 @@
                 <input type="tel" name="mobilenum" placeholder="Enter your mobile number" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="register">Register</button>
-                <p>Already have an account? <a href="#" onclick="showForm('login-form')">Login</a></p>
+                <p>Already have an account? <button type="button" id="to-login" onclick="toggleForm()">Login</button></p>
             </form>
         </div>
-
     </div>
-    <script src="script.js">
+    <script>
+        function toggleForm() {
+            document.getElementById("login-form").classList.toggle("form-box-invisible");
+            document.getElementById("register-form").classList.toggle("form-box-invisible");
+        }
     </script>
 </body>
 </html>
